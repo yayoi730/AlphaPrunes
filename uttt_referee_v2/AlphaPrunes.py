@@ -13,9 +13,22 @@ def makeAMove():
     readMoves()
     findNextMove()
     addMove()
-def readMoves():
-    f = open("move.txt", "r")
-    lines = f.readlines()
+def readMoves(file):
+    f = open(file, "r")
+    lines = file.readlines()
+    for line in lines:
+        last_move = line
+        if line.isspace():
+            break
+        else:
+            # populates matrices
+            moves = line.split()
+            if moves[0] == "X":
+                board[int(moves[1]),int(moves[2])] = 1 # X = 1
+            else:
+                board[int(moves[1]), int(moves[2])] = 2 # O = 2
+    return last_move
+
 def findNextMove():
     lastMove = readMoves("move.txt")
     takenList = []
