@@ -52,7 +52,7 @@ def addMove(globalBoard, localBoard):
     board[globalBoard][localBoard] = 1
     print(board)
     f = open("move_file", "a")
-    f.write("X " + globalBoard + " " + localBoard)
+    f.write("X " + str(globalBoard) + " " + str(localBoard))
     f.close()
 
 
