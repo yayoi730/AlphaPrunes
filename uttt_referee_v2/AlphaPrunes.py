@@ -1,3 +1,4 @@
+import os
 from os.path import exists
 
 import numpy as np
@@ -10,14 +11,16 @@ board = np.zeros((9, 9))
 
 def main():
     while not exists("AlphaPrunes.go"):
-
-    move = findNextMove(readMoves('first_four_moves.txt'))
-    addMove(move[0],move[1])
+        pass
+    print("here1")
+    print(os.listdir())
+    move = findNextMove(readMoves('first_four_moves'))
+    addMove(move[0], move[1])
 
 
 def readMoves(file):
-    f = open(file, "r")
-    lines = file.readlines()
+    f = open(file)
+    lines = f.readlines()
     for line in lines:
         lastMove = line
         if line.isspace():
@@ -43,9 +46,10 @@ def findNextMove(lastMove):
 
 def addMove(globalBoard, localBoard):
     board[globalBoard][localBoard] = 1
-    f = open("move_file.txt", "a")
+    f = open("move_file", "a")
     f.write("X " + globalBoard + " " + localBoard)
     f.close()
+
 
 if __name__ == "__main__":
     main()
