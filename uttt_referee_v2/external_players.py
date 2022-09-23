@@ -14,7 +14,6 @@ import time
 from functools import partial
 from os import listdir
 from os.path import isfile, join
-
 import pygame
 
 from core_gameplay import BAD_MOVE_I_WIN, BAD_MOVE_I_LOST, BAD_MOVE_DRAW, local_to_global

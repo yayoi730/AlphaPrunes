@@ -1,4 +1,11 @@
+import numpy as np
 import pygame
+
+board = np.zeros((9, 9))
+
+def initBoard():
+    readMoves('first_four_moves.txt')
+
 
 def makeAMove():
     readMoves()
