@@ -36,6 +36,10 @@ def findNextMove():
         if board[lastMove[2]][i] == 1 or board[lastMove[2]][i] == 2:
             takenList.append(board[lastMove[2]][i])
     move = [lastMove[2],random.choice([i for i in range(0,8) if i not in takenList])]
-    board[move[0]][move[1]] = 1
     return move
-def addMove():
+
+def addMove(globalBoard, localBoard):
+    board[globalBoard][localBoard] = 1
+    f = open("move_file.txt", "a")
+    f.write("X " + globalBoard + " " + localBoard)
+    f.close()
