@@ -7,14 +7,8 @@ board = np.zeros((9, 9))
 
 
 def main():
-    readMoves('first_four_moves.txt')
-    
-
-
-def makeAMove():
-    readMoves()
-    findNextMove()
-    addMove()
+    move = findNextMove(readMoves('first_four_moves.txt'))
+    addMove(move[0],move[1])
 
 
 def readMoves(file):
@@ -34,8 +28,7 @@ def readMoves(file):
     return lastMove
 
 
-def findNextMove():
-    lastMove = readMoves("move_file.txt")
+def findNextMove(lastMove):
     takenList = []
     for i in range(0, 8):
         if board[lastMove[2]][i] == 1 or board[lastMove[2]][i] == 2:
