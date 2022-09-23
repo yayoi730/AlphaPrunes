@@ -32,15 +32,17 @@ def readMoves(file):
                 board[int(moves[1]), int(moves[2])] = 1  # X = 1
             else:
                 board[int(moves[1]), int(moves[2])] = 2  # O = 2
+    f.close()
     return lastMove
 
 
 def findNextMove(lastMove):
+    print(board)
     takenList = []
     for i in range(0, 8):
-        if board[lastMove[2]][i] == 1 or board[lastMove[2]][i] == 2:
+        if board[int(lastMove[2])][i] == 1 or board[int(lastMove[2])][i] == 2:
             takenList.append(board[lastMove[2]][i])
-    move = [lastMove[2], random.choice([i for i in range(0, 8) if i not in takenList])]
+    move = [int(lastMove[2]), random.choice([i for i in range(0, 8) if i not in takenList])]
     return move
 
 
