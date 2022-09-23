@@ -51,7 +51,8 @@ def findNextMove(lastMove):
 def addMove(globalBoard, localBoard):
     board[globalBoard][localBoard] = 1
     print(board)
-    f = open("move_file", "a")
+    f = open("move_file", "r+")
+    f.truncate(0)
     f.write("X " + str(globalBoard) + " " + str(localBoard))
     f.close()
 
