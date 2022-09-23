@@ -1,3 +1,5 @@
+from os.path import exists
+
 import numpy as np
 from random import random
 
@@ -7,6 +9,8 @@ board = np.zeros((9, 9))
 
 
 def main():
+    while not exists("AlphaPrunes.go"):
+
     move = findNextMove(readMoves('first_four_moves.txt'))
     addMove(move[0],move[1])
 
