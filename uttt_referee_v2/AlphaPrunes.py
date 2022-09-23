@@ -35,7 +35,7 @@ def readMoves(file):
 
 
 def findNextMove():
-    lastMove = readMoves("move.txt")
+    lastMove = readMoves("move_file.txt")
     takenList = []
     for i in range(0, 8):
         if board[lastMove[2]][i] == 1 or board[lastMove[2]][i] == 2:
