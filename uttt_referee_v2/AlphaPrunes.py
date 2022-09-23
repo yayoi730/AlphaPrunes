@@ -6,19 +6,19 @@ import random
 
 import pygame
 
-board = np.zeros((9, 9))
+board = np.zeros((9, 9)) # stores the moves that have been played
 
 
 def main():
     while not exists("AlphaPrunes.go"):
         pass
-    print("here1")
-    print(os.listdir())
     move = findNextMove(readMoves('first_four_moves'))
     addMove(int(move[0]), int(move[1]))
 
 
 def readMoves(file):
+    # reads in txt file and populates the board with the move information
+    # returns the last move made in a list ex: ['X'. '1' '2']
     f = open(file)
     lines = f.readlines()
     for line in lines:
@@ -37,24 +37,40 @@ def readMoves(file):
 
 
 def findNextMove(lastMove):
-    print(board)
+    # function that determines the next move the player will make
     lastMove = int(lastMove[2])
     takenList = []
     for i in range(0, 8):
         if board[lastMove][i] == 1 or board[lastMove][i] == 2:
             takenList.append(board[lastMove][i])
     move = [lastMove, random.choice([i for i in range(0, 8) if i not in takenList])]
-    print(move)   
     return move
 
 
 def addMove(globalBoard, localBoard):
+    # function that takes in the next move (int) and adds it to move_file
     board[globalBoard][localBoard] = 1
-    print(board)
+    display()
     f = open("move_file", "r+")
     f.truncate(0)
     f.write("X " + str(globalBoard) + " " + str(localBoard))
     f.close()
+
+def display():
+    # function that can be called to display the current state of the board
+    # arranged in ultimate tic-tac-toe style (X = 1 and O = 2)
+    print("Current Board:")
+    print(str(board[0][0:3]) + " | " + str(board[1][0:3]) + " | " + str(board[2][0:3]))
+    print(str(board[0][3:6]) + " | " + str(board[1][3:6]) + " | " + str(board[2][3:6]))
+    print(str(board[0][6:9]) + " | " + str(board[1][6:9]) + " | " + str(board[2][6:9]))
+    print("------------------------------------")
+    print(str(board[3][0:3]) + " | " + str(board[4][0:3]) + " | " + str(board[5][0:3]))
+    print(str(board[3][3:6]) + " | " + str(board[4][3:6]) + " | " + str(board[5][3:6]))
+    print(str(board[3][6:9]) + " | " + str(board[4][6:9]) + " | " + str(board[5][6:9]))
+    print("------------------------------------")
+    print(str(board[6][0:3]) + " | " + str(board[7][0:3]) + " | " + str(board[8][0:3]))
+    print(str(board[6][3:6]) + " | " + str(board[7][3:6]) + " | " + str(board[8][3:6]))
+    print(str(board[6][6:9]) + " | " + str(board[7][6:9]) + " | " + str(board[8][6:9]))
 
 
 if __name__ == "__main__":
