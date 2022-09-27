@@ -17,8 +17,8 @@ def main():
         while not exists("AlphaPrunes.go"):
             pass
         last_move = readMoves('first_four_moves')
-        move = findNextMove(last_move)
-        addMove(move, last_move)
+        next_move = findNextMove(last_move)
+        addMove(next_move, last_move)
 
 def readMoves(file):
     # reads in txt file and populates the board with the move information
@@ -40,27 +40,27 @@ def readMoves(file):
     return last_move
 
 
-def findNextMove(lastMove):
+def findNextMove(last_move):
     # function that determines the next move the player will make
-    lastMove = int(lastMove[2])
+    last_move = int(last_move[2])
     takenList = []
     for i in range(0, 8):
-        if board[lastMove][i] == 1 or board[lastMove][i] == 2:
-            takenList.append(board[lastMove][i])
-    move = [lastMove, random.choice([i for i in range(0, 8) if i not in takenList])]
+        if board[last_move][i] == 1 or board[last_move][i] == 2:
+            takenList.append(board[last_move][i])
+    move = [last_move, random.choice([i for i in range(0, 8) if i not in takenList])]
     return move
 
 
-def addMove(move, lastmove):
+def addMove(next_move, lastmove):
     # function that takes in the next move (int) and adds it to move_file
     f = open("move_file", "r+")
     f.truncate(0)
     if lastmove[0] == "X":
-        board[int(move[0])][int(move[1])] = 2
-        f.write("0 " + str(move[0]) + " " + str(move[1]))
+        board[int(next_move[0])][int(next_move[1])] = 2
+        f.write("0 " + str(next_move[0]) + " " + str(next_move[1]))
     else:
-        board[int(move[0])][int(move[1])] = 1
-        f.write("X " + str(move[0]) + " " + str(move[1]))
+        board[int(next_move[0])][int(next_move[1])] = 1
+        f.write("X " + str(next_move[0]) + " " + str(next_move[1]))
     f.close()
     display()
 
