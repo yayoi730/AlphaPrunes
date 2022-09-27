@@ -32,9 +32,9 @@ def readMoves(file):
             # populates matrices
             moves = line.split()
             if moves[0] == "X":
-                board[int(moves[0])][int(moves[1])] = 1  # X = 1
+                board[int(moves[1])][int(moves[2])] = 1  # X = 1
             else:
-                board[int(moves[0])][int(moves[1])] = 2  # O = 2
+                board[int(moves[1])][int(moves[2])] = 2  # O = 2
     f.close()
     return last_move
 
@@ -56,10 +56,10 @@ def addMove(move, lastmove):
     f.truncate(0)
     if lastmove[0] == "X":
         board[int(move[0])][int(move[1])] = 2
-        f.write("0 " + move[0] + " " + move[1])
+        f.write("0 " + str(move[0]) + " " + str(move[1]))
     else:
         board[int(move[0])][int(move[1])] = 1
-        f.write("x " + move[0] + " " + move[1])
+        f.write("X " + str(move[0]) + " " + str(move[1]))
     f.close()
     display()
 
