@@ -56,10 +56,10 @@ def addMove(move, lastmove):
     f.truncate(0)
     if lastmove[0] == "X":
         board[int(move[1])][int(move[2])] = 1
-        f.write("X " + move[1] + " " + move[2])
+        f.write("0 " + move[1] + " " + move[2])
     else:
         board[int(move[1])][int(move[2])] = 2
-        f.write("O " + move[1] + " " + move[2])
+        f.write("x " + move[1] + " " + move[2])
     f.close()
     display()
 
