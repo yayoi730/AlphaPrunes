@@ -11,11 +11,14 @@ board = np.zeros((9, 9)) # stores the moves that have been played
 
 
 def main():
-    print("hello")
     while not exists("end_game"):
-        time.sleep(5)
+        time.sleep(10)
         while not exists("AlphaPrunes.go"):
             pass
+        if os.stat("move_file").st_size == 0:
+            last_move = readMoves('first_four_moves')
+        else:
+            last_move = readMoves('move_file')
         last_move = readMoves('first_four_moves')
         next_move = findNextMove(last_move)
         addMove(next_move, last_move)
