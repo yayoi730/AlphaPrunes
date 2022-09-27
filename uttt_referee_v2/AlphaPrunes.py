@@ -1,6 +1,6 @@
 import os
 from os.path import exists
-from time import sleep
+from time import time
 
 import numpy as np
 import random
@@ -11,13 +11,13 @@ board = np.zeros((9, 9)) # stores the moves that have been played
 
 
 def main():
+    print("hello")
     while not exists("end_game"):
         while not exists("AlphaPrunes.go"):
             pass
-        if exists("AlphaPrunes.go"):
-            last_move = readMoves('first_four_moves')
-            move = findNextMove(last_move)
-            addMove(move, last_move)
+        last_move = readMoves('first_four_moves')
+        move = findNextMove(last_move)
+        addMove(move, last_move)
 
 def readMoves(file):
     # reads in txt file and populates the board with the move information
@@ -32,9 +32,9 @@ def readMoves(file):
             # populates matrices
             moves = line.split()
             if moves[0] == "X":
-                board[int(moves[1])][int(moves[2])] = 1  # X = 1
+                board[int(moves[0])][int(moves[1])] = 1  # X = 1
             else:
-                board[int(moves[1])][int(moves[2])] = 2  # O = 2
+                board[int(moves[0])][int(moves[1])] = 2  # O = 2
     f.close()
     return last_move
 
@@ -55,10 +55,10 @@ def addMove(move, lastmove):
     f = open("move_file", "r+")
     f.truncate(0)
     if lastmove[0] == "X":
-        board[int(move[1])][int(move[2])] = 1
+        board[int(move[1])][int(move[2])] = 2
         f.write("0 " + move[1] + " " + move[2])
     else:
-        board[int(move[1])][int(move[2])] = 2
+        board[int(move[1])][int(move[2])] = 1
         f.write("x " + move[1] + " " + move[2])
     f.close()
     display()
