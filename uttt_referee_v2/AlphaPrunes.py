@@ -1,6 +1,6 @@
 import os
 from os.path import exists
-from time import time
+import time
 
 import numpy as np
 import random
@@ -13,6 +13,7 @@ board = np.zeros((9, 9)) # stores the moves that have been played
 def main():
     print("hello")
     while not exists("end_game"):
+        time.sleep(5)
         while not exists("AlphaPrunes.go"):
             pass
         last_move = readMoves('first_four_moves')
