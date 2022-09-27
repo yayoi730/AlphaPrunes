@@ -51,11 +51,11 @@ def findNextMove(last_move):
     return move
 
 
-def addMove(next_move, lastmove):
+def addMove(next_move, last_move):
     # function that takes in the next move (int) and adds it to move_file
     f = open("move_file", "r+")
     f.truncate(0)
-    if lastmove[0] == "X":
+    if last_move[0] == "X":
         board[int(next_move[0])][int(next_move[1])] = 2
         f.write("0 " + str(next_move[0]) + " " + str(next_move[1]))
     else:
