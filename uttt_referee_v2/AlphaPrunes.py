@@ -1,5 +1,6 @@
 import os
 from os.path import exists
+from time import sleep
 
 import numpy as np
 import random
@@ -10,11 +11,13 @@ board = np.zeros((9, 9)) # stores the moves that have been played
 
 
 def main():
-    while not exists("AlphaPrunes.go"):
-        pass
-    move = findNextMove(readMoves('first_four_moves'))
-    addMove(int(move[0]), int(move[1]))
-
+    while not exists("end_game"):
+        while not exists("AlphaPrunes.go"):
+            pass
+        if exists("AlphaPrunes.go"):
+            last_move = readMoves('first_four_moves')
+            move = findNextMove(last_move)
+            addMove(move, last_move)
 
 def readMoves(file):
     # reads in txt file and populates the board with the move information
@@ -22,7 +25,7 @@ def readMoves(file):
     f = open(file)
     lines = f.readlines()
     for line in lines:
-        lastMove = line
+        last_move = line
         if line.isspace():
             break
         else:
@@ -33,7 +36,7 @@ def readMoves(file):
             else:
                 board[int(moves[1])][int(moves[2])] = 2  # O = 2
     f.close()
-    return lastMove
+    return last_move
 
 
 def findNextMove(lastMove):
@@ -47,14 +50,18 @@ def findNextMove(lastMove):
     return move
 
 
-def addMove(globalBoard, localBoard):
+def addMove(move, lastmove):
     # function that takes in the next move (int) and adds it to move_file
-    board[globalBoard][localBoard] = 1
-    display()
     f = open("move_file", "r+")
     f.truncate(0)
-    f.write("X " + str(globalBoard) + " " + str(localBoard))
+    if lastmove[0] == "X":
+        board[int(move[1])][int(move[2])] = 1
+        f.write("X " + move[1] + " " + move[2])
+    else:
+        board[int(move[1])][int(move[2])] = 2
+        f.write("O " + move[1] + " " + move[2])
     f.close()
+    display()
 
 def display():
     # function that can be called to display the current state of the board
