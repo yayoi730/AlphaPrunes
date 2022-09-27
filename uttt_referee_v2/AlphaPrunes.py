@@ -26,7 +26,7 @@ def readMoves(file):
     f = open(file)
     lines = f.readlines()
     for line in lines:
-        last_move = line
+        last_move = line.split()
         if line.isspace():
             break
         else:
