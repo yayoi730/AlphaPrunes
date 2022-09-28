@@ -12,7 +12,7 @@ board = np.zeros((9, 9)) # stores the moves that have been played
 def main():
     startFlag = True
     while not exists("end_game"):
-        time.sleep(10)
+        time.sleep(5)
         while not exists("AlphaPrunes.go"):
             pass
         if startFlag:
@@ -24,7 +24,8 @@ def main():
         next_move = findNextMove(last_move)
         addMove(next_move, last_move)
         startFlag = False
-
+    os.remove("end_game")
+    os.remove("AlphaPrunes.go")
 def readMoves(file):
     # reads in txt file and populates the board with the move information
     # returns the last move made in a list ex: ['X'. '1' '2']
@@ -37,13 +38,13 @@ def readMoves(file):
         else:
             # populates matrices
             moves = line.split()
-            if moves[0] == "X":
+            if moves[0] == 'AlphaPrunes':
                 board[int(moves[1])][int(moves[2])] = 1  # X = 1
             else:
                 board[int(moves[1])][int(moves[2])] = 2  # O = 2
     f.close()
+    print(board[0][0:3])
     return last_move
-
 
 def findNextMove(last_move):
     # function that determines the next move the player will make
@@ -60,7 +61,7 @@ def addMove(next_move, last_move):
     # function that takes in the next move (int) and adds it to move_file
     f = open("move_file", "r+")
     f.truncate(0)
-    if last_move[0] == "X":
+    if last_move[0] == "AlphaPrunes":
         board[int(next_move[0])][int(next_move[1])] = 2
         f.write("AlphaPrunes " + str(next_move[0]) + " " + str(next_move[1]))
     else:
